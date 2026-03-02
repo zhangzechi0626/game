@@ -220,6 +220,8 @@
 
     .water-layer {
       width: 100%;
+      height: 25%;
+      flex-shrink: 0;
       transition: all 0.3s ease;
       will-change: transform;
       transform: translateZ(0);
@@ -689,7 +691,7 @@
       'brown': '#8B4513',      // 棕色
       'yellow': '#FFE66D',     // 黄色
       'green': '#95E1D3',      // 绿色
-      'blue': '#4ECDC4',       // 蓝色
+      'blue': '#1E90FF',       // 深蓝色
       'gray': '#9E9E9E',       // 灰色
       'purple': '#B19CD9',     // 紫色
       'orange': '#FFA500',     // 橙色
@@ -916,11 +918,9 @@
         }
 
         // 渲染水层
-        const layerHeight = 240 / gameState.capacity;
         tube.forEach(colorStr => {
           const layer = document.createElement('div');
           layer.className = 'water-layer';
-          layer.style.height = layerHeight + 'px';
 
           if (isHidden(colorStr)) {
             // 隐藏颜色：显示问号
