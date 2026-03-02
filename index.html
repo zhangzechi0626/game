@@ -585,19 +585,23 @@
       {
         level: 1,
         tubes: [
-          // 6个试管：底3层隐藏，顶1层可见（10种颜色各出现4次）
+          // 关卡1：red出现8次（占2个试管），其他9种颜色各4次
+          // 总水量：8+36=44格，填满11个试管
+
+          // 6个试管：底3层隐藏，顶1层可见
           ['?red', '?pink', '?brown', 'yellow'],
           ['?green', '?blue', '?gray', 'purple'],
           ['?orange', '?black', '?red', 'pink'],
           ['?brown', '?yellow', '?green', 'blue'],
           ['?gray', '?purple', '?orange', 'black'],
-          ['?red', '?pink', '?brown', 'yellow'],
+          ['?red', '?red', '?pink', 'brown'],
 
-          // 4个试管：底2层隐藏，顶2层可见
+          // 5个试管：底2层隐藏，顶2层可见
+          ['?yellow', '?green', 'blue', 'gray'],
+          ['?purple', '?orange', 'black', 'red'],
+          ['?red', '?pink', 'brown', 'yellow'],
           ['?green', '?blue', 'gray', 'purple'],
-          ['?orange', '?black', 'red', 'pink'],
-          ['?brown', '?yellow', 'green', 'blue'],
-          ['?gray', '?purple', 'orange', 'black'],
+          ['?orange', '?black', 'red', 'red'],
 
           // 2个普通空管
           [],
@@ -608,24 +612,27 @@
           []
         ],
         capacity: 4,
-        specialTubes: [12, 13]
+        specialTubes: [13, 14]
       },
       {
         level: 2,
         tubes: [
+          // 关卡2：blue出现8次（占2个试管），其他9种颜色各4次
+
           // 6个试管：底3层隐藏，顶1层可见
           ['?blue', '?red', '?green', 'yellow'],
           ['?pink', '?brown', '?purple', 'gray'],
           ['?orange', '?black', '?blue', 'red'],
           ['?green', '?yellow', '?pink', 'brown'],
           ['?purple', '?gray', '?orange', 'black'],
-          ['?blue', '?red', '?green', 'yellow'],
+          ['?blue', '?blue', '?red', 'green'],
 
-          // 4个试管：底2层隐藏，顶2层可见
+          // 5个试管：底2层隐藏，顶2层可见
+          ['?yellow', '?pink', 'brown', 'purple'],
+          ['?gray', '?orange', 'black', 'blue'],
+          ['?blue', '?red', 'green', 'yellow'],
           ['?pink', '?brown', 'purple', 'gray'],
-          ['?orange', '?black', 'blue', 'red'],
-          ['?green', '?yellow', 'pink', 'brown'],
-          ['?purple', '?gray', 'orange', 'black'],
+          ['?orange', '?black', 'blue', 'blue'],
 
           // 2个普通空管
           [],
@@ -636,24 +643,27 @@
           []
         ],
         capacity: 4,
-        specialTubes: [12, 13]
+        specialTubes: [13, 14]
       },
       {
         level: 3,
         tubes: [
+          // 关卡3：green出现8次（占2个试管），其他9种颜色各4次
+
           // 6个试管：底3层隐藏，顶1层可见
           ['?purple', '?brown', '?red', 'pink'],
           ['?yellow', '?green', '?blue', 'gray'],
           ['?orange', '?black', '?purple', 'brown'],
           ['?red', '?pink', '?yellow', 'green'],
           ['?blue', '?gray', '?orange', 'black'],
-          ['?purple', '?brown', '?red', 'pink'],
+          ['?green', '?green', '?purple', 'brown'],
 
-          // 4个试管：底2层隐藏，顶2层可见
-          ['?yellow', '?green', 'blue', 'gray'],
-          ['?orange', '?black', 'purple', 'brown'],
+          // 5个试管：底2层隐藏，顶2层可见
           ['?red', '?pink', 'yellow', 'green'],
           ['?blue', '?gray', 'orange', 'black'],
+          ['?green', '?purple', 'brown', 'red'],
+          ['?pink', '?yellow', 'blue', 'gray'],
+          ['?orange', '?black', 'green', 'green'],
 
           // 2个普通空管
           [],
@@ -664,24 +674,27 @@
           []
         ],
         capacity: 4,
-        specialTubes: [12, 13]
+        specialTubes: [13, 14]
       },
       {
         level: 4,
         tubes: [
+          // 关卡4：purple出现8次（占2个试管），其他9种颜色各4次
+
           // 6个试管：底3层隐藏，顶1层可见
           ['?yellow', '?gray', '?blue', 'red'],
           ['?pink', '?brown', '?purple', 'green'],
           ['?orange', '?black', '?yellow', 'gray'],
           ['?blue', '?red', '?pink', 'brown'],
           ['?purple', '?green', '?orange', 'black'],
-          ['?yellow', '?gray', '?blue', 'red'],
+          ['?purple', '?purple', '?yellow', 'gray'],
 
-          // 4个试管：底2层隐藏，顶2层可见
-          ['?pink', '?brown', 'purple', 'green'],
-          ['?orange', '?black', 'yellow', 'gray'],
+          // 5个试管：底2层隐藏，顶2层可见
           ['?blue', '?red', 'pink', 'brown'],
           ['?purple', '?green', 'orange', 'black'],
+          ['?purple', '?yellow', 'gray', 'blue'],
+          ['?red', '?pink', 'brown', 'green'],
+          ['?orange', '?black', 'purple', 'purple'],
 
           // 2个普通空管
           [],
@@ -692,24 +705,27 @@
           []
         ],
         capacity: 4,
-        specialTubes: [12, 13]
+        specialTubes: [13, 14]
       },
       {
         level: 5,
         tubes: [
+          // 关卡5：yellow出现8次（占2个试管），其他9种颜色各4次
+
           // 6个试管：底3层隐藏，顶1层可见
           ['?green', '?brown', '?purple', 'red'],
           ['?yellow', '?pink', '?blue', 'gray'],
           ['?orange', '?black', '?green', 'brown'],
           ['?purple', '?red', '?yellow', 'pink'],
           ['?blue', '?gray', '?orange', 'black'],
-          ['?green', '?brown', '?purple', 'red'],
+          ['?yellow', '?yellow', '?green', 'brown'],
 
-          // 4个试管：底2层隐藏，顶2层可见
-          ['?yellow', '?pink', 'blue', 'gray'],
-          ['?orange', '?black', 'green', 'brown'],
+          // 5个试管：底2层隐藏，顶2层可见
           ['?purple', '?red', 'yellow', 'pink'],
           ['?blue', '?gray', 'orange', 'black'],
+          ['?yellow', '?green', 'brown', 'purple'],
+          ['?red', '?pink', 'blue', 'gray'],
+          ['?orange', '?black', 'yellow', 'yellow'],
 
           // 2个普通空管
           [],
@@ -720,7 +736,7 @@
           []
         ],
         capacity: 4,
-        specialTubes: [12, 13]
+        specialTubes: [13, 14]
       }
     ];
 
