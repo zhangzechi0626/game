@@ -518,80 +518,167 @@
 
   <script>
     // ============ 数据定义 ============
+    // 颜色格式：'red' 表示可见颜色，'?red' 表示隐藏颜色（显示为?）
     const LEVELS = [
       {
         level: 1,
         tubes: [
-          ['red', 'blue', 'red', 'blue'],
-          ['green', 'red', 'blue', 'green'],
-          ['blue', 'green', 'red', 'green'],
-          [],  // 普通空管
-          [],  // 特殊空管1
-          []   // 特殊空管2
+          // 6个试管：底3层隐藏
+          ['red', '?blue', '?green', '?red'],
+          ['blue', '?red', '?yellow', '?blue'],
+          ['green', '?pink', '?red', '?green'],
+          ['yellow', '?blue', '?green', '?yellow'],
+          ['pink', '?red', '?blue', '?pink'],
+          ['purple', '?green', '?yellow', '?purple'],
+
+          // 4个试管：底2层隐藏
+          ['red', 'blue', '?green', '?red'],
+          ['yellow', 'green', '?pink', '?blue'],
+          ['pink', 'purple', '?red', '?yellow'],
+          ['blue', 'red', '?green', '?purple'],
+
+          // 2个试管：只有2层水
+          ['red', 'blue'],
+          ['green', 'yellow'],
+
+          // 2个普通空管
+          [],
+          [],
+
+          // 2个特殊空管
+          [],
+          []
         ],
         capacity: 4,
-        specialTubes: [4, 5]  // 特殊空管的索引
+        specialTubes: [14, 15]
       },
       {
         level: 2,
         tubes: [
-          ['red', 'yellow', 'blue', 'green'],
-          ['blue', 'red', 'green', 'yellow'],
-          ['green', 'blue', 'yellow', 'red'],
-          ['yellow', 'green', 'red', 'blue'],
-          [],  // 普通空管
-          [],  // 特殊空管1
-          []   // 特殊空管2
+          // 6个试管：底3层隐藏
+          ['pink', '?red', '?blue', '?green'],
+          ['blue', '?yellow', '?pink', '?red'],
+          ['green', '?purple', '?yellow', '?blue'],
+          ['yellow', '?green', '?red', '?pink'],
+          ['red', '?blue', '?purple', '?yellow'],
+          ['purple', '?pink', '?green', '?red'],
+
+          // 4个试管：底2层隐藏
+          ['red', 'green', '?blue', '?yellow'],
+          ['blue', 'pink', '?red', '?purple'],
+          ['yellow', 'purple', '?green', '?pink'],
+          ['green', 'red', '?yellow', '?blue'],
+
+          // 2个试管：只有2层水
+          ['pink', 'purple'],
+          ['blue', 'red'],
+
+          // 2个普通空管
+          [],
+          [],
+
+          // 2个特殊空管
+          [],
+          []
         ],
         capacity: 4,
-        specialTubes: [5, 6]
+        specialTubes: [14, 15]
       },
       {
         level: 3,
         tubes: [
-          ['purple', 'red', 'yellow', 'blue'],
-          ['green', 'purple', 'red', 'yellow'],
-          ['blue', 'green', 'purple', 'red'],
-          ['yellow', 'blue', 'green', 'purple'],
-          ['red', 'yellow', 'blue', 'green'],
-          [],  // 普通空管
-          [],  // 特殊空管1
-          []   // 特殊空管2
+          // 6个试管：底3层隐藏
+          ['brown', '?red', '?blue', '?green'],
+          ['blue', '?pink', '?yellow', '?red'],
+          ['green', '?purple', '?brown', '?blue'],
+          ['yellow', '?green', '?red', '?pink'],
+          ['red', '?blue', '?purple', '?brown'],
+          ['purple', '?pink', '?yellow', '?green'],
+
+          // 4个试管：底2层隐藏
+          ['red', 'brown', '?blue', '?yellow'],
+          ['blue', 'pink', '?red', '?purple'],
+          ['yellow', 'purple', '?green', '?brown'],
+          ['green', 'red', '?pink', '?blue'],
+
+          // 2个试管：只有2层水
+          ['brown', 'purple'],
+          ['pink', 'yellow'],
+
+          // 2个普通空管
+          [],
+          [],
+
+          // 2个特殊空管
+          [],
+          []
         ],
         capacity: 4,
-        specialTubes: [6, 7]
+        specialTubes: [14, 15]
       },
       {
         level: 4,
         tubes: [
-          ['pink', 'purple', 'red', 'yellow'],
-          ['blue', 'pink', 'green', 'purple'],
-          ['red', 'blue', 'yellow', 'pink'],
-          ['green', 'purple', 'red', 'blue'],
-          ['yellow', 'green', 'pink', 'purple'],
-          ['blue', 'red', 'yellow', 'green'],
-          [],  // 普通空管
-          [],  // 特殊空管1
-          []   // 特殊空管2
+          // 6个试管：底3层隐藏
+          ['gray', '?red', '?blue', '?green'],
+          ['blue', '?pink', '?yellow', '?gray'],
+          ['green', '?purple', '?brown', '?red'],
+          ['yellow', '?green', '?gray', '?pink'],
+          ['red', '?blue', '?purple', '?brown'],
+          ['purple', '?gray', '?yellow', '?green'],
+
+          // 4个试管：底2层隐藏
+          ['red', 'gray', '?blue', '?yellow'],
+          ['blue', 'pink', '?red', '?purple'],
+          ['brown', 'purple', '?green', '?gray'],
+          ['green', 'brown', '?pink', '?blue'],
+
+          // 2个试管：只有2层水
+          ['gray', 'purple'],
+          ['pink', 'brown'],
+
+          // 2个普通空管
+          [],
+          [],
+
+          // 2个特殊空管
+          [],
+          []
         ],
         capacity: 4,
-        specialTubes: [7, 8]
+        specialTubes: [14, 15]
       },
       {
         level: 5,
         tubes: [
-          ['pink', 'purple', 'blue', 'red'],
-          ['yellow', 'pink', 'green', 'purple'],
-          ['blue', 'red', 'yellow', 'pink'],
-          ['green', 'purple', 'blue', 'red'],
-          ['yellow', 'green', 'pink', 'purple'],
-          ['red', 'yellow', 'blue', 'green'],
-          [],  // 普通空管
-          [],  // 特殊空管1
-          []   // 特殊空管2
+          // 6个试管：底3层隐藏
+          ['gray', '?red', '?blue', '?green'],
+          ['blue', '?pink', '?yellow', '?gray'],
+          ['green', '?purple', '?brown', '?red'],
+          ['yellow', '?green', '?gray', '?pink'],
+          ['red', '?blue', '?purple', '?brown'],
+          ['purple', '?gray', '?yellow', '?green'],
+
+          // 4个试管：底2层隐藏
+          ['pink', 'gray', '?blue', '?yellow'],
+          ['blue', 'brown', '?red', '?purple'],
+          ['brown', 'purple', '?green', '?gray'],
+          ['green', 'pink', '?yellow', '?blue'],
+
+          // 2个试管：只有2层水
+          ['gray', 'red'],
+          ['pink', 'brown'],
+
+          // 2个普通空管
+          [],
+          [],
+
+          // 2个特殊空管
+          [],
+          []
         ],
         capacity: 4,
-        specialTubes: [7, 8]
+        specialTubes: [14, 15]
       }
     ];
 
@@ -633,20 +720,46 @@
     };
 
     // ============ 工具函数 ============
+    // 检查颜色是否隐藏
+    function isHidden(colorStr) {
+      return colorStr && colorStr.startsWith('?');
+    }
+
+    // 获取真实颜色（去掉?前缀）
+    function getRealColor(colorStr) {
+      if (!colorStr) return null;
+      return colorStr.startsWith('?') ? colorStr.substring(1) : colorStr;
+    }
+
+    // 揭示隐藏颜色（移除?前缀）
+    function revealColor(colorStr) {
+      if (!colorStr) return colorStr;
+      return colorStr.startsWith('?') ? colorStr.substring(1) : colorStr;
+    }
+
     function getTopColor(tube) {
       if (tube.length === 0) return null;
-      return tube[tube.length - 1];
+      const topColorStr = tube[tube.length - 1];
+      return getRealColor(topColorStr);
     }
 
     function canPour(fromTube, toTube) {
       // 源试管为空
       if (fromTube.length === 0) return false;
 
+      // 如果源试管顶部是隐藏颜色，不能倒
+      const topColorStr = fromTube[fromTube.length - 1];
+      if (isHidden(topColorStr)) return false;
+
       // 目标试管已满
       if (toTube.length >= gameState.capacity) return false;
 
       // 目标试管为空，可以倒
       if (toTube.length === 0) return true;
+
+      // 如果目标试管顶部是隐藏颜色，不能倒入
+      const targetTopStr = toTube[toTube.length - 1];
+      if (isHidden(targetTopStr)) return false;
 
       // 顶部颜色相同，可以倒
       return getTopColor(fromTube) === getTopColor(toTube);
@@ -666,13 +779,16 @@
         return false;
       }
 
-      // 获取源试管顶部颜色
+      // 获取源试管顶部颜色（真实颜色）
       const topColor = getTopColor(fromTube);
 
       // 计算源试管顶部连续相同颜色的数量
       let pourCount = 0;
       for (let i = fromTube.length - 1; i >= 0; i--) {
-        if (fromTube[i] === topColor) {
+        const currentColor = getRealColor(fromTube[i]);
+        // 如果遇到隐藏颜色，停止
+        if (isHidden(fromTube[i])) break;
+        if (currentColor === topColor) {
           pourCount++;
         } else {
           break;
@@ -689,6 +805,11 @@
       const water = fromTube.splice(fromTube.length - actualPourCount, actualPourCount);
       toTube.push(...water);
 
+      // 揭示源试管新的顶层颜色（如果是隐藏的）
+      if (fromTube.length > 0 && isHidden(fromTube[fromTube.length - 1])) {
+        fromTube[fromTube.length - 1] = revealColor(fromTube[fromTube.length - 1]);
+      }
+
       return true;
     }
 
@@ -704,10 +825,18 @@
           return false;
         }
 
-        // 检查是否只有一种颜色
-        const firstColor = tube[0];
-        for (let color of tube) {
-          if (color !== firstColor) {
+        // 如果还有隐藏颜色，不算完成
+        for (let colorStr of tube) {
+          if (isHidden(colorStr)) {
+            return false;
+          }
+        }
+
+        // 检查是否只有一种颜色（使用真实颜色比较）
+        const firstColor = getRealColor(tube[0]);
+        for (let colorStr of tube) {
+          const currentColor = getRealColor(colorStr);
+          if (currentColor !== firstColor) {
             return false;
           }
         }
@@ -784,11 +913,28 @@
 
         // 渲染水层
         const layerHeight = 240 / gameState.capacity;
-        tube.forEach(color => {
+        tube.forEach(colorStr => {
           const layer = document.createElement('div');
           layer.className = 'water-layer';
           layer.style.height = layerHeight + 'px';
-          layer.style.backgroundColor = COLORS[color];
+
+          if (isHidden(colorStr)) {
+            // 隐藏颜色：显示问号
+            layer.style.backgroundColor = '#CCCCCC';
+            layer.style.position = 'relative';
+            layer.style.display = 'flex';
+            layer.style.alignItems = 'center';
+            layer.style.justifyContent = 'center';
+            layer.style.fontSize = '32px';
+            layer.style.fontWeight = 'bold';
+            layer.style.color = '#666';
+            layer.textContent = '?';
+          } else {
+            // 正常颜色
+            const realColor = getRealColor(colorStr);
+            layer.style.backgroundColor = COLORS[realColor];
+          }
+
           tubeDiv.appendChild(layer);
         });
 
