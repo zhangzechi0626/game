@@ -113,7 +113,9 @@
     }
 
     .level-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
+      opacity: 0.85;
+      transition: transform 0.1s ease, opacity 0.1s ease;
     }
 
     /* 游戏区样式 */
@@ -155,7 +157,9 @@
     }
 
     #restart-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
+      opacity: 0.85;
+      transition: transform 0.1s ease, opacity 0.1s ease;
     }
 
     /* 试管容器样式 */
@@ -180,10 +184,18 @@
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-tap-highlight-color: transparent;
     }
 
     .tube:hover {
       transform: translateY(-5px);
+    }
+
+    .tube:active {
+      transform: scale(0.95) translateY(-5px);
+      transition: transform 0.1s ease;
     }
 
     .tube.selected {
@@ -196,6 +208,8 @@
     .water-layer {
       width: 100%;
       transition: all 0.3s ease;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .empty-hint {
@@ -278,7 +292,9 @@
     }
 
     .modal-buttons button:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
+      opacity: 0.85;
+      transition: transform 0.1s ease, opacity 0.1s ease;
     }
 
     /* 工具类 */
