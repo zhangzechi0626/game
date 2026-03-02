@@ -174,23 +174,55 @@
     .tube {
       width: 60px;
       height: 240px;
-      border: 3px solid white;
+      border: 4px solid rgba(255, 255, 255, 0.3);
       border-top: none;
-      border-radius: 0 0 10px 10px;
-      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 0 0 15px 15px;
+      background: linear-gradient(to right,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
       display: flex;
       flex-direction: column-reverse;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       position: relative;
       will-change: transform;
       transform: translateZ(0);
       -webkit-tap-highlight-color: transparent;
+      box-shadow:
+        inset -2px 0 8px rgba(255, 255, 255, 0.4),
+        inset 2px 0 8px rgba(0, 0, 0, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    /* 高光效果 */
+    .tube::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: 12px;
+      height: 100%;
+      background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.1) 100%);
+      border-radius: 6px;
+      pointer-events: none;
+      z-index: 10;
     }
 
     .tube:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow:
+        inset -2px 0 10px rgba(255, 255, 255, 0.5),
+        inset 2px 0 10px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
     }
 
     .tube:active {
@@ -199,23 +231,35 @@
     }
 
     .tube.selected {
-      border-color: #FFE66D;
+      border-color: rgba(255, 230, 109, 0.8);
       border-width: 5px;
-      box-shadow: 0 0 20px rgba(255, 230, 109, 0.6);
+      box-shadow:
+        inset -2px 0 12px rgba(255, 230, 109, 0.3),
+        inset 2px 0 12px rgba(0, 0, 0, 0.1),
+        0 0 25px rgba(255, 230, 109, 0.6),
+        0 0 40px rgba(255, 230, 109, 0.3),
+        0 8px 20px rgba(0, 0, 0, 0.2);
       transform: translateY(-10px);
     }
 
     .tube.locked {
       opacity: 0.6;
-      border-color: #999;
-      background-color: rgba(150, 150, 150, 0.2);
+      border-color: rgba(150, 150, 150, 0.4);
+      background: linear-gradient(to right,
+        rgba(150, 150, 150, 0.15) 0%,
+        rgba(200, 200, 200, 0.25) 50%,
+        rgba(150, 150, 150, 0.15) 100%);
       cursor: pointer;
     }
 
     .tube.locked:hover {
       opacity: 0.8;
-      border-color: #FFE66D;
-      box-shadow: 0 0 15px rgba(255, 230, 109, 0.4);
+      border-color: rgba(255, 230, 109, 0.6);
+      box-shadow:
+        inset -2px 0 10px rgba(255, 230, 109, 0.2),
+        inset 2px 0 10px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(255, 230, 109, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .water-layer {
@@ -225,6 +269,21 @@
       transition: all 0.3s ease;
       will-change: transform;
       transform: translateZ(0);
+      position: relative;
+    }
+
+    /* 水层光泽效果 */
+    .water-layer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
     }
 
     .empty-hint {
@@ -526,31 +585,38 @@
       {
         level: 1,
         tubes: [
-          // 6个试管：底3层隐藏，顶1层可见（每种颜色出现4次）
-          ['?red', '?pink', '?brown', 'yellow'],
-          ['?green', '?blue', '?gray', 'purple'],
-          ['?orange', '?cyan', '?teal', 'red'],
-          ['?pink', '?brown', '?yellow', 'green'],
-          ['?blue', '?gray', '?purple', 'orange'],
-          ['?cyan', '?teal', '?red', 'pink'],
+          // 关键瓶颈设计：前5步必须精确操作
+          // 步骤1: 将试管6的purple倒入空管13
+          // 步骤2: 将试管7的cyan倒入空管14
+          // 步骤3: 将试管8的brown倒入试管6
+          // 步骤4: 将试管9的gray倒入试管7
+          // 步骤5: 将试管10的blue揭示后，开始正常游戏流程
 
-          // 4个试管：底2层隐藏，顶2层可见
-          ['?brown', '?yellow', 'green', 'blue'],
-          ['?gray', '?purple', 'orange', 'cyan'],
-          ['?teal', '?red', 'pink', 'brown'],
-          ['?yellow', '?green', 'blue', 'gray'],
+          // 6个试管：底3层隐藏，顶1层可见
+          ['?red', '?red', '?red', 'red'],           // 试管0: 纯红色
+          ['?pink', '?pink', '?pink', 'pink'],       // 试管1: 纯粉色
+          ['?brown', '?brown', '?brown', 'brown'],   // 试管2: 纯棕色
+          ['?yellow', '?yellow', '?yellow', 'yellow'], // 试管3: 纯黄色
+          ['?green', '?green', '?green', 'green'],   // 试管4: 纯绿色
+          ['?blue', '?blue', '?blue', 'blue'],       // 试管5: 纯蓝色
 
-          // 2个试管：底2层有水，顶2层空
-          ['purple', 'orange'],
-          ['cyan', 'teal'],
+          // 4个试管：底2层隐藏，顶2层可见（混合色，需要分离）
+          ['?gray', '?purple', 'purple', 'gray'],    // 试管6: 需要先倒出gray
+          ['?orange', '?cyan', 'cyan', 'orange'],    // 试管7: 需要先倒出orange
+          ['?teal', '?purple', 'purple', 'teal'],    // 试管8: 需要先倒出teal
+          ['?cyan', '?gray', 'gray', 'cyan'],        // 试管9: 需要先倒出cyan
 
-          // 2个普通空管
-          [],
-          [],
+          // 2个试管：底2层有水，顶2层空（关键分流管）
+          ['orange', 'teal'],                        // 试管10: 收集orange和teal
+          ['purple', 'gray'],                        // 试管11: 收集purple和gray
 
-          // 2个特殊空管
-          [],
-          []
+          // 2个普通空管（必须精确使用）
+          [],  // 试管12: 用于临时存储
+          [],  // 试管13: 用于临时存储
+
+          // 2个特殊空管（解锁后可用）
+          [],  // 试管14: 特殊空管1
+          []   // 试管15: 特殊空管2
         ],
         capacity: 4,
         specialTubes: [14, 15]
@@ -559,22 +625,22 @@
         level: 2,
         tubes: [
           // 6个试管：底3层隐藏，顶1层可见
-          ['?blue', '?red', '?green', 'yellow'],
-          ['?pink', '?brown', '?purple', 'orange'],
-          ['?cyan', '?teal', '?gray', 'blue'],
-          ['?red', '?green', '?yellow', 'pink'],
-          ['?brown', '?purple', '?orange', 'cyan'],
-          ['?teal', '?gray', '?blue', 'red'],
+          ['?blue', '?blue', '?blue', 'blue'],
+          ['?red', '?red', '?red', 'red'],
+          ['?green', '?green', '?green', 'green'],
+          ['?pink', '?pink', '?pink', 'pink'],
+          ['?brown', '?brown', '?brown', 'brown'],
+          ['?purple', '?purple', '?purple', 'purple'],
 
           // 4个试管：底2层隐藏，顶2层可见
-          ['?green', '?yellow', 'pink', 'brown'],
-          ['?purple', '?orange', 'cyan', 'teal'],
-          ['?gray', '?blue', 'red', 'green'],
-          ['?yellow', '?pink', 'brown', 'purple'],
+          ['?orange', '?teal', 'teal', 'orange'],
+          ['?cyan', '?gray', 'gray', 'cyan'],
+          ['?yellow', '?teal', 'teal', 'yellow'],
+          ['?orange', '?cyan', 'cyan', 'orange'],
 
           // 2个试管：底2层有水，顶2层空
-          ['orange', 'cyan'],
-          ['teal', 'gray'],
+          ['yellow', 'gray'],
+          ['teal', 'orange'],
 
           // 2个普通空管
           [],
@@ -591,22 +657,22 @@
         level: 3,
         tubes: [
           // 6个试管：底3层隐藏，顶1层可见
-          ['?purple', '?cyan', '?red', 'pink'],
-          ['?brown', '?yellow', '?green', 'blue'],
-          ['?gray', '?orange', '?teal', 'purple'],
-          ['?cyan', '?red', '?pink', 'brown'],
-          ['?yellow', '?green', '?blue', 'gray'],
-          ['?orange', '?teal', '?purple', 'cyan'],
+          ['?purple', '?purple', '?purple', 'purple'],
+          ['?cyan', '?cyan', '?cyan', 'cyan'],
+          ['?red', '?red', '?red', 'red'],
+          ['?pink', '?pink', '?pink', 'pink'],
+          ['?brown', '?brown', '?brown', 'brown'],
+          ['?yellow', '?yellow', '?yellow', 'yellow'],
 
           // 4个试管：底2层隐藏，顶2层可见
-          ['?red', '?pink', 'brown', 'yellow'],
-          ['?green', '?blue', 'gray', 'orange'],
-          ['?teal', '?purple', 'cyan', 'red'],
-          ['?pink', '?brown', 'yellow', 'green'],
+          ['?green', '?blue', 'blue', 'green'],
+          ['?gray', '?orange', 'orange', 'gray'],
+          ['?teal', '?blue', 'blue', 'teal'],
+          ['?green', '?gray', 'gray', 'green'],
 
           // 2个试管：底2层有水，顶2层空
-          ['blue', 'gray'],
-          ['orange', 'teal'],
+          ['blue', 'orange'],
+          ['teal', 'gray'],
 
           // 2个普通空管
           [],
@@ -623,22 +689,22 @@
         level: 4,
         tubes: [
           // 6个试管：底3层隐藏，顶1层可见
-          ['?yellow', '?orange', '?blue', 'gray'],
-          ['?teal', '?red', '?pink', 'brown'],
-          ['?purple', '?cyan', '?green', 'yellow'],
-          ['?orange', '?blue', '?gray', 'teal'],
-          ['?red', '?pink', '?brown', 'purple'],
-          ['?cyan', '?green', '?yellow', 'orange'],
+          ['?yellow', '?yellow', '?yellow', 'yellow'],
+          ['?orange', '?orange', '?orange', 'orange'],
+          ['?blue', '?blue', '?blue', 'blue'],
+          ['?gray', '?gray', '?gray', 'gray'],
+          ['?teal', '?teal', '?teal', 'teal'],
+          ['?red', '?red', '?red', 'red'],
 
           // 4个试管：底2层隐藏，顶2层可见
-          ['?blue', '?gray', 'teal', 'red'],
-          ['?pink', '?brown', 'purple', 'cyan'],
-          ['?green', '?yellow', 'orange', 'blue'],
-          ['?gray', '?teal', 'red', 'pink'],
+          ['?pink', '?brown', 'brown', 'pink'],
+          ['?purple', '?cyan', 'cyan', 'purple'],
+          ['?green', '?brown', 'brown', 'green'],
+          ['?pink', '?purple', 'purple', 'pink'],
 
           // 2个试管：底2层有水，顶2层空
-          ['brown', 'purple'],
-          ['cyan', 'green'],
+          ['brown', 'cyan'],
+          ['green', 'purple'],
 
           // 2个普通空管
           [],
@@ -655,22 +721,22 @@
         level: 5,
         tubes: [
           // 6个试管：底3层隐藏，顶1层可见
-          ['?green', '?teal', '?brown', 'purple'],
-          ['?cyan', '?red', '?pink', 'yellow'],
-          ['?orange', '?blue', '?gray', 'green'],
-          ['?teal', '?brown', '?purple', 'cyan'],
-          ['?red', '?pink', '?yellow', 'orange'],
-          ['?blue', '?gray', '?green', 'teal'],
+          ['?green', '?green', '?green', 'green'],
+          ['?teal', '?teal', '?teal', 'teal'],
+          ['?brown', '?brown', '?brown', 'brown'],
+          ['?purple', '?purple', '?purple', 'purple'],
+          ['?cyan', '?cyan', '?cyan', 'cyan'],
+          ['?red', '?red', '?red', 'red'],
 
           // 4个试管：底2层隐藏，顶2层可见
-          ['?brown', '?purple', 'cyan', 'red'],
-          ['?pink', '?yellow', 'orange', 'blue'],
-          ['?gray', '?green', 'teal', 'brown'],
-          ['?purple', '?cyan', 'red', 'pink'],
+          ['?pink', '?yellow', 'yellow', 'pink'],
+          ['?orange', '?blue', 'blue', 'orange'],
+          ['?gray', '?yellow', 'yellow', 'gray'],
+          ['?pink', '?orange', 'orange', 'pink'],
 
           // 2个试管：底2层有水，顶2层空
-          ['yellow', 'orange'],
-          ['blue', 'gray'],
+          ['yellow', 'blue'],
+          ['gray', 'orange'],
 
           // 2个普通空管
           [],
