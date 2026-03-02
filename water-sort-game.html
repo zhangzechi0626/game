@@ -12,10 +12,20 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
   <style>
+    /* 移动端触摸优化 */
     * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    html, body {
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
     }
 
     body {
@@ -26,8 +36,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding-top: max(20px, env(safe-area-inset-top));
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+      padding-left: max(20px, env(safe-area-inset-left));
+      padding-right: max(20px, env(safe-area-inset-right));
       position: relative;
+      touch-action: pan-y;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body::before {
