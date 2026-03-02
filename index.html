@@ -205,6 +205,19 @@
       transform: translateY(-10px);
     }
 
+    .tube.locked {
+      opacity: 0.6;
+      border-color: #999;
+      background-color: rgba(150, 150, 150, 0.2);
+      cursor: pointer;
+    }
+
+    .tube.locked:hover {
+      opacity: 0.8;
+      border-color: #FFE66D;
+      box-shadow: 0 0 15px rgba(255, 230, 109, 0.4);
+    }
+
     .water-layer {
       width: 100%;
       transition: all 0.3s ease;
@@ -512,9 +525,12 @@
           ['red', 'blue', 'red', 'blue'],
           ['green', 'red', 'blue', 'green'],
           ['blue', 'green', 'red', 'green'],
-          []
+          [],  // 普通空管
+          [],  // 特殊空管1
+          []   // 特殊空管2
         ],
-        capacity: 4
+        capacity: 4,
+        specialTubes: [4, 5]  // 特殊空管的索引
       },
       {
         level: 2,
@@ -523,9 +539,12 @@
           ['blue', 'red', 'green', 'yellow'],
           ['green', 'blue', 'yellow', 'red'],
           ['yellow', 'green', 'red', 'blue'],
-          []
+          [],  // 普通空管
+          [],  // 特殊空管1
+          []   // 特殊空管2
         ],
-        capacity: 4
+        capacity: 4,
+        specialTubes: [5, 6]
       },
       {
         level: 3,
@@ -535,9 +554,12 @@
           ['blue', 'green', 'purple', 'red'],
           ['yellow', 'blue', 'green', 'purple'],
           ['red', 'yellow', 'blue', 'green'],
-          []
+          [],  // 普通空管
+          [],  // 特殊空管1
+          []   // 特殊空管2
         ],
-        capacity: 4
+        capacity: 4,
+        specialTubes: [6, 7]
       },
       {
         level: 4,
@@ -548,9 +570,12 @@
           ['green', 'purple', 'red', 'blue'],
           ['yellow', 'green', 'orange', 'purple'],
           ['blue', 'red', 'yellow', 'green'],
-          []
+          [],  // 普通空管
+          [],  // 特殊空管1
+          []   // 特殊空管2
         ],
-        capacity: 4
+        capacity: 4,
+        specialTubes: [7, 8]
       },
       {
         level: 5,
@@ -561,9 +586,12 @@
           ['green', 'purple', 'blue', 'red'],
           ['yellow', 'green', 'orange', 'purple'],
           ['red', 'yellow', 'blue', 'green'],
-          []
+          [],  // 普通空管
+          [],  // 特殊空管1
+          []   // 特殊空管2
         ],
-        capacity: 4
+        capacity: 4,
+        specialTubes: [7, 8]
       }
     ];
 
@@ -597,7 +625,9 @@
       currentLevel: null,
       tubes: [],
       selectedTube: null,
-      capacity: 4
+      capacity: 4,
+      specialTubes: [],      // 特殊空管的索引
+      unlockedTubes: []      // 已解锁的特殊空管索引
     };
 
     // ============ 工具函数 ============
@@ -695,6 +725,8 @@
       gameState.tubes = deepCopy(levelData.tubes);
       gameState.capacity = levelData.capacity;
       gameState.selectedTube = null;
+      gameState.specialTubes = levelData.specialTubes || [];
+      gameState.unlockedTubes = [];  // 重置解锁状态
     }
 
     // ============ UI渲染 ============
@@ -718,16 +750,33 @@
       gameState.tubes.forEach((tube, index) => {
         const tubeDiv = document.createElement('div');
         tubeDiv.className = 'tube';
+
+        // 检查是否是锁定的特殊空管
+        const isSpecial = gameState.specialTubes.includes(index);
+        const isLocked = isSpecial && !gameState.unlockedTubes.includes(index);
+
+        if (isLocked) {
+          tubeDiv.classList.add('locked');
+        }
+
         if (gameState.selectedTube === index) {
           tubeDiv.classList.add('selected');
         }
+
         tubeDiv.onclick = () => handleTubeClick(index);
 
         // 如果试管为空，显示提示
         if (tube.length === 0) {
           const hint = document.createElement('div');
           hint.className = 'empty-hint';
-          hint.textContent = '空';
+
+          if (isLocked) {
+            hint.textContent = '🔒';
+            hint.style.fontSize = '36px';
+          } else {
+            hint.textContent = '空';
+          }
+
           tubeDiv.appendChild(hint);
         }
 
@@ -775,6 +824,25 @@
     }
 
     function handleTubeClick(index) {
+      // 检查是否是锁定的特殊空管
+      const isSpecial = gameState.specialTubes.includes(index);
+      const isLocked = isSpecial && !gameState.unlockedTubes.includes(index);
+
+      if (isLocked) {
+        // 弹出输入框
+        const input = prompt('请输入解锁密码：');
+        if (input === '我很菜') {
+          // 解锁成功
+          gameState.unlockedTubes.push(index);
+          renderTubes();
+          alert('解锁成功！你可以使用这个空管了');
+        } else if (input !== null) {
+          // 输入错误
+          alert('解锁失败！密码错误');
+        }
+        return;
+      }
+
       // 如果未选中试管
       if (gameState.selectedTube === null) {
         gameState.selectedTube = index;
