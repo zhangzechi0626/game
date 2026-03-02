@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>水排序游戏</title>
+  <title>分类倒水</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#667eea">
-  <meta name="description" content="经典的水排序益智游戏，在线免费玩">
+  <meta name="description" content="经典的分类倒水益智游戏，在线免费玩">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
@@ -476,7 +476,7 @@
 
   <div id="app">
     <div class="creator-info">制作者：张泽池</div>
-    <h1>水排序游戏</h1>
+    <h1>分类倒水</h1>
 
     <!-- 关卡选择器 -->
     <div id="level-selector"></div>
@@ -512,7 +512,6 @@
           ['red', 'blue', 'red', 'blue'],
           ['green', 'red', 'blue', 'green'],
           ['blue', 'green', 'red', 'green'],
-          [],
           []
         ],
         capacity: 4
@@ -520,10 +519,10 @@
       {
         level: 2,
         tubes: [
-          ['red', 'green', 'blue', 'red'],
-          ['blue', 'red', 'green', 'blue'],
-          ['green', 'blue', 'red', 'green'],
-          [],
+          ['red', 'yellow', 'blue', 'green'],
+          ['blue', 'red', 'green', 'yellow'],
+          ['green', 'blue', 'yellow', 'red'],
+          ['yellow', 'green', 'red', 'blue'],
           []
         ],
         capacity: 4
@@ -531,11 +530,11 @@
       {
         level: 3,
         tubes: [
-          ['red', 'blue', 'yellow', 'red'],
-          ['green', 'red', 'blue', 'green'],
-          ['yellow', 'green', 'blue', 'yellow'],
-          ['blue', 'yellow', 'red', 'green'],
-          [],
+          ['purple', 'red', 'yellow', 'blue'],
+          ['green', 'purple', 'red', 'yellow'],
+          ['blue', 'green', 'purple', 'red'],
+          ['yellow', 'blue', 'green', 'purple'],
+          ['red', 'yellow', 'blue', 'green'],
           []
         ],
         capacity: 4
@@ -543,11 +542,12 @@
       {
         level: 4,
         tubes: [
-          ['yellow', 'red', 'blue', 'green'],
-          ['blue', 'yellow', 'green', 'red'],
-          ['green', 'blue', 'red', 'yellow'],
-          ['red', 'green', 'yellow', 'blue'],
-          [],
+          ['orange', 'purple', 'red', 'yellow'],
+          ['blue', 'orange', 'green', 'purple'],
+          ['red', 'blue', 'yellow', 'orange'],
+          ['green', 'purple', 'red', 'blue'],
+          ['yellow', 'green', 'orange', 'purple'],
+          ['blue', 'red', 'yellow', 'green'],
           []
         ],
         capacity: 4
@@ -555,12 +555,12 @@
       {
         level: 5,
         tubes: [
-          ['red', 'purple', 'blue', 'yellow'],
-          ['green', 'red', 'purple', 'blue'],
-          ['yellow', 'green', 'blue', 'red'],
-          ['purple', 'yellow', 'green', 'purple'],
-          ['blue', 'yellow', 'red', 'green'],
-          [],
+          ['orange', 'purple', 'blue', 'red'],
+          ['yellow', 'orange', 'green', 'purple'],
+          ['blue', 'red', 'yellow', 'orange'],
+          ['green', 'purple', 'blue', 'red'],
+          ['yellow', 'green', 'orange', 'purple'],
+          ['red', 'yellow', 'blue', 'green'],
           []
         ],
         capacity: 4
