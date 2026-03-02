@@ -519,25 +519,26 @@
   <script>
     // ============ 数据定义 ============
     // 颜色格式：'red' 表示可见颜色，'?red' 表示隐藏颜色（显示为?）
+    // 数组索引：[0]=底层, [1]=次底层, [2]=次次底层, [3]=顶层
     const LEVELS = [
       {
         level: 1,
         tubes: [
-          // 6个试管：底3层隐藏
-          ['red', '?blue', '?green', '?red'],
-          ['blue', '?red', '?yellow', '?blue'],
-          ['green', '?pink', '?red', '?green'],
-          ['yellow', '?blue', '?green', '?yellow'],
-          ['pink', '?red', '?blue', '?pink'],
-          ['purple', '?green', '?yellow', '?purple'],
+          // 6个试管：底3层隐藏，顶1层可见
+          ['?red', '?blue', '?green', 'red'],
+          ['?blue', '?red', '?yellow', 'blue'],
+          ['?green', '?pink', '?red', 'green'],
+          ['?yellow', '?blue', '?green', 'yellow'],
+          ['?pink', '?red', '?blue', 'pink'],
+          ['?purple', '?green', '?yellow', 'purple'],
 
-          // 4个试管：底2层隐藏
-          ['red', 'blue', '?green', '?red'],
-          ['yellow', 'green', '?pink', '?blue'],
-          ['pink', 'purple', '?red', '?yellow'],
-          ['blue', 'red', '?green', '?purple'],
+          // 4个试管：底2层隐藏，顶2层可见
+          ['?green', '?red', 'red', 'blue'],
+          ['?pink', '?blue', 'yellow', 'green'],
+          ['?red', '?yellow', 'pink', 'purple'],
+          ['?green', '?purple', 'blue', 'red'],
 
-          // 2个试管：只有2层水
+          // 2个试管：底2层有水，顶2层空
           ['red', 'blue'],
           ['green', 'yellow'],
 
@@ -555,21 +556,21 @@
       {
         level: 2,
         tubes: [
-          // 6个试管：底3层隐藏
-          ['pink', '?red', '?blue', '?green'],
-          ['blue', '?yellow', '?pink', '?red'],
-          ['green', '?purple', '?yellow', '?blue'],
-          ['yellow', '?green', '?red', '?pink'],
-          ['red', '?blue', '?purple', '?yellow'],
-          ['purple', '?pink', '?green', '?red'],
+          // 6个试管：底3层隐藏，顶1层可见
+          ['?red', '?blue', '?green', 'pink'],
+          ['?yellow', '?pink', '?red', 'blue'],
+          ['?purple', '?yellow', '?blue', 'green'],
+          ['?green', '?red', '?pink', 'yellow'],
+          ['?blue', '?purple', '?yellow', 'red'],
+          ['?pink', '?green', '?red', 'purple'],
 
-          // 4个试管：底2层隐藏
-          ['red', 'green', '?blue', '?yellow'],
-          ['blue', 'pink', '?red', '?purple'],
-          ['yellow', 'purple', '?green', '?pink'],
-          ['green', 'red', '?yellow', '?blue'],
+          // 4个试管：底2层隐藏，顶2层可见
+          ['?blue', '?yellow', 'red', 'green'],
+          ['?red', '?purple', 'blue', 'pink'],
+          ['?green', '?pink', 'yellow', 'purple'],
+          ['?yellow', '?blue', 'green', 'red'],
 
-          // 2个试管：只有2层水
+          // 2个试管：底2层有水，顶2层空
           ['pink', 'purple'],
           ['blue', 'red'],
 
@@ -587,21 +588,21 @@
       {
         level: 3,
         tubes: [
-          // 6个试管：底3层隐藏
-          ['brown', '?red', '?blue', '?green'],
-          ['blue', '?pink', '?yellow', '?red'],
-          ['green', '?purple', '?brown', '?blue'],
-          ['yellow', '?green', '?red', '?pink'],
-          ['red', '?blue', '?purple', '?brown'],
-          ['purple', '?pink', '?yellow', '?green'],
+          // 6个试管：底3层隐藏，顶1层可见
+          ['?red', '?blue', '?green', 'brown'],
+          ['?pink', '?yellow', '?red', 'blue'],
+          ['?purple', '?brown', '?blue', 'green'],
+          ['?green', '?red', '?pink', 'yellow'],
+          ['?blue', '?purple', '?brown', 'red'],
+          ['?pink', '?yellow', '?green', 'purple'],
 
-          // 4个试管：底2层隐藏
-          ['red', 'brown', '?blue', '?yellow'],
-          ['blue', 'pink', '?red', '?purple'],
-          ['yellow', 'purple', '?green', '?brown'],
-          ['green', 'red', '?pink', '?blue'],
+          // 4个试管：底2层隐藏，顶2层可见
+          ['?blue', '?yellow', 'red', 'brown'],
+          ['?red', '?purple', 'blue', 'pink'],
+          ['?green', '?brown', 'yellow', 'purple'],
+          ['?pink', '?blue', 'green', 'red'],
 
-          // 2个试管：只有2层水
+          // 2个试管：底2层有水，顶2层空
           ['brown', 'purple'],
           ['pink', 'yellow'],
 
@@ -619,21 +620,21 @@
       {
         level: 4,
         tubes: [
-          // 6个试管：底3层隐藏
-          ['gray', '?red', '?blue', '?green'],
-          ['blue', '?pink', '?yellow', '?gray'],
-          ['green', '?purple', '?brown', '?red'],
-          ['yellow', '?green', '?gray', '?pink'],
-          ['red', '?blue', '?purple', '?brown'],
-          ['purple', '?gray', '?yellow', '?green'],
+          // 6个试管：底3层隐藏，顶1层可见
+          ['?red', '?blue', '?green', 'gray'],
+          ['?pink', '?yellow', '?gray', 'blue'],
+          ['?purple', '?brown', '?red', 'green'],
+          ['?green', '?gray', '?pink', 'yellow'],
+          ['?blue', '?purple', '?brown', 'red'],
+          ['?gray', '?yellow', '?green', 'purple'],
 
-          // 4个试管：底2层隐藏
-          ['red', 'gray', '?blue', '?yellow'],
-          ['blue', 'pink', '?red', '?purple'],
-          ['brown', 'purple', '?green', '?gray'],
-          ['green', 'brown', '?pink', '?blue'],
+          // 4个试管：底2层隐藏，顶2层可见
+          ['?blue', '?yellow', 'red', 'gray'],
+          ['?red', '?purple', 'blue', 'pink'],
+          ['?green', '?gray', 'brown', 'purple'],
+          ['?pink', '?blue', 'green', 'brown'],
 
-          // 2个试管：只有2层水
+          // 2个试管：底2层有水，顶2层空
           ['gray', 'purple'],
           ['pink', 'brown'],
 
@@ -651,21 +652,21 @@
       {
         level: 5,
         tubes: [
-          // 6个试管：底3层隐藏
-          ['gray', '?red', '?blue', '?green'],
-          ['blue', '?pink', '?yellow', '?gray'],
-          ['green', '?purple', '?brown', '?red'],
-          ['yellow', '?green', '?gray', '?pink'],
-          ['red', '?blue', '?purple', '?brown'],
-          ['purple', '?gray', '?yellow', '?green'],
+          // 6个试管：底3层隐藏，顶1层可见
+          ['?red', '?blue', '?green', 'gray'],
+          ['?pink', '?yellow', '?gray', 'blue'],
+          ['?purple', '?brown', '?red', 'green'],
+          ['?green', '?gray', '?pink', 'yellow'],
+          ['?blue', '?purple', '?brown', 'red'],
+          ['?gray', '?yellow', '?green', 'purple'],
 
-          // 4个试管：底2层隐藏
-          ['pink', 'gray', '?blue', '?yellow'],
-          ['blue', 'brown', '?red', '?purple'],
-          ['brown', 'purple', '?green', '?gray'],
-          ['green', 'pink', '?yellow', '?blue'],
+          // 4个试管：底2层隐藏，顶2层可见
+          ['?blue', '?yellow', 'pink', 'gray'],
+          ['?red', '?purple', 'blue', 'brown'],
+          ['?green', '?gray', 'brown', 'purple'],
+          ['?yellow', '?blue', 'green', 'pink'],
 
-          // 2个试管：只有2层水
+          // 2个试管：底2层有水，顶2层空
           ['gray', 'red'],
           ['pink', 'brown'],
 
