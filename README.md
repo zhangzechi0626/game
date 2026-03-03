@@ -1,4 +1,4 @@
-# 水排序游戏
+# 分类倒水游戏
 
 <div align="center">
 
@@ -7,7 +7,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
 
-一款经典的水排序益智游戏，专为移动端优化，支持离线游玩
+一款经典的分类倒水益智游戏，专为移动端优化，支持离线游玩
 
 [在线演示](https://你的用户名.github.io/water-sort-puzzle/) · [查看文档](#文档导航) · [报告问题](../../issues)
 
@@ -17,7 +17,7 @@
 
 ## 项目简介
 
-水排序游戏是一款简单而富有挑战性的益智游戏。玩家需要将不同颜色的水倒入试管中，使每个试管中的水颜色一致才能过关。游戏规则简单易懂，但随着关卡难度的提升，需要更多的策略思考。
+分类倒水游戏是一款简单而富有挑战性的益智游戏。玩家需要将不同颜色的水倒入试管中，使每个试管中的水颜色一致才能过关。游戏规则简单易懂，但随着关卡难度的提升，需要更多的策略思考。
 
 本项目已经过移动端优化，采用渐进式 Web 应用（PWA）技术，支持添加到手机桌面，提供接近原生应用的体验。
 
@@ -287,6 +287,6 @@ SOFTWARE.
 
 Made with ❤️ by 张泽池
 
-[返回顶部](#水排序游戏)
+[返回顶部](#分类倒水游戏)
 
 </div>
