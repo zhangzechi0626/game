@@ -172,158 +172,252 @@
       justify-items: center;
     }
 
+    /* 瓶子容器（包含瓶颈和瓶身） */
+    .bottle-wrapper {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* 瓶颈部分 */
+    .bottle-neck {
+      width: 28px;
+      height: 35px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 5;
+      border: 4px solid rgba(180, 200, 220, 0.8);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(235, 240, 250, 0.9) 50%,
+        rgba(255, 255, 255, 0.85) 100%);
+      box-shadow:
+        inset -2px 0 6px rgba(255, 255, 255, 0.6),
+        inset 2px 0 6px rgba(150, 170, 200, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    /* 瓶身部分 */
     .tube {
       width: 60px;
       height: 240px;
-      border: 5px solid rgba(100, 100, 100, 0.2);
+      border: 4px solid rgba(180, 200, 220, 0.8);
       border-top: none;
       border-radius: 0 0 20px 20px;
       background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.9) 0%,
-        rgba(240, 240, 255, 0.95) 50%,
-        rgba(255, 255, 255, 0.9) 100%);
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(235, 240, 250, 0.9) 50%,
+        rgba(255, 255, 255, 0.85) 100%);
       display: flex;
       flex-direction: column-reverse;
       overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s ease;
       position: relative;
       will-change: transform;
       transform: translateZ(0);
       -webkit-tap-highlight-color: transparent;
       box-shadow:
-        inset -3px 0 12px rgba(255, 255, 255, 0.6),
-        inset 3px 0 12px rgba(180, 180, 255, 0.2),
-        0 6px 20px rgba(0, 0, 0, 0.18),
-        0 2px 8px rgba(0, 0, 0, 0.1),
-        inset 0 -2px 4px rgba(200, 200, 255, 0.3);
+        inset -3px 0 12px rgba(255, 255, 255, 0.7),
+        inset 3px 0 12px rgba(150, 170, 200, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.08);
       backdrop-filter: blur(8px);
     }
 
-    /* 瓶子高光效果 */
+    /* 瓶身左侧高光 */
     .tube::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 12px;
-      width: 16px;
+      left: 10px;
+      width: 18px;
       height: 100%;
       background: linear-gradient(to bottom,
-        rgba(255, 255, 255, 0.7) 0%,
-        rgba(255, 255, 255, 0.4) 30%,
-        rgba(255, 255, 255, 0.2) 60%,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.5) 30%,
+        rgba(255, 255, 255, 0.25) 60%,
         rgba(255, 255, 255, 0.1) 100%);
-      border-radius: 8px;
+      border-radius: 10px;
       pointer-events: none;
       z-index: 10;
     }
 
-    /* 瓶子右侧反光 */
+    /* 瓶身右侧反光 */
     .tube::after {
       content: '';
       position: absolute;
       top: 0;
-      right: 8px;
-      width: 8px;
+      right: 10px;
+      width: 10px;
       height: 100%;
       background: linear-gradient(to bottom,
-        rgba(200, 200, 255, 0.4) 0%,
-        rgba(180, 180, 255, 0.2) 50%,
-        rgba(200, 200, 255, 0.1) 100%);
-      border-radius: 4px;
+        rgba(200, 220, 240, 0.5) 0%,
+        rgba(180, 200, 220, 0.3) 50%,
+        rgba(200, 220, 240, 0.15) 100%);
+      border-radius: 6px;
       pointer-events: none;
       z-index: 10;
     }
 
-    /* 瓶塞样式 */
-    .bottle-cap {
+    /* 瓶颈高光 */
+    .bottle-neck::before {
+      content: '';
       position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 45px;
-      height: 25px;
-      background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
-      border-radius: 8px 8px 4px 4px;
-      box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.3),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
-        inset 0 2px 4px rgba(255, 255, 255, 0.3);
-      z-index: 11;
+      top: 0;
+      left: 4px;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.3) 100%);
+      border-radius: 4px;
       pointer-events: none;
     }
 
-    /* 瓶塞顶部纹理 */
+    /* 瓶塞样式 - 更大更明显 */
+    .bottle-cap {
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 35px;
+      height: 45px;
+      background: linear-gradient(180deg,
+        #4a5568 0%,
+        #5a6478 20%,
+        #4a5568 50%,
+        #3a4558 80%,
+        #2d3748 100%);
+      border-radius: 12px 12px 6px 6px;
+      box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+        inset 0 3px 6px rgba(255, 255, 255, 0.25),
+        inset -2px 0 4px rgba(0, 0, 0, 0.2),
+        inset 2px 0 4px rgba(255, 255, 255, 0.15);
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    /* 瓶塞顶部圆形装饰 */
     .bottle-cap::before {
       content: '';
       position: absolute;
-      top: 6px;
+      top: 8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 30px;
-      height: 2px;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 1px;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(100, 120, 140, 0.3) 50%,
+        transparent 70%);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    /* 瓶塞底部 */
+    /* 瓶塞底部边缘 */
     .bottle-cap::after {
       content: '';
       position: absolute;
-      bottom: -3px;
+      bottom: -4px;
       left: 50%;
       transform: translateX(-50%);
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(to right, transparent, #6F3513 20%, #6F3513 80%, transparent);
-      border-radius: 0 0 2px 2px;
+      width: 38px;
+      height: 4px;
+      background: linear-gradient(to right,
+        transparent,
+        rgba(30, 40, 50, 0.8) 20%,
+        rgba(30, 40, 50, 0.9) 50%,
+        rgba(30, 40, 50, 0.8) 80%,
+        transparent);
+      border-radius: 0 0 3px 3px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    .tube:hover {
+    .bottle-wrapper:hover {
       transform: translateY(-8px);
-      box-shadow:
-        inset -2px 0 10px rgba(255, 255, 255, 0.5),
-        inset 2px 0 10px rgba(0, 0, 0, 0.15),
-        0 8px 20px rgba(0, 0, 0, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.5);
     }
 
-    .tube:active {
+    .bottle-wrapper:hover .tube {
+      box-shadow:
+        inset -2px 0 10px rgba(255, 255, 255, 0.8),
+        inset 2px 0 10px rgba(150, 170, 200, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.3);
+      border-color: rgba(200, 220, 240, 0.9);
+    }
+
+    .bottle-wrapper:hover .bottle-neck {
+      border-color: rgba(200, 220, 240, 0.9);
+    }
+
+    .bottle-wrapper:active {
       transform: scale(0.95) translateY(-5px);
       transition: transform 0.1s ease;
     }
 
-    .tube.selected {
-      border-color: rgba(255, 230, 109, 0.8);
-      border-width: 5px;
+    .bottle-wrapper.selected .tube {
+      border-color: rgba(255, 230, 109, 0.9);
+      border-width: 4px;
       box-shadow:
-        inset -2px 0 12px rgba(255, 230, 109, 0.3),
+        inset -2px 0 12px rgba(255, 230, 109, 0.4),
         inset 2px 0 12px rgba(0, 0, 0, 0.1),
-        0 0 25px rgba(255, 230, 109, 0.6),
-        0 0 40px rgba(255, 230, 109, 0.3),
+        0 0 25px rgba(255, 230, 109, 0.7),
+        0 0 40px rgba(255, 230, 109, 0.4),
         0 8px 20px rgba(0, 0, 0, 0.2);
-      transform: translateY(-10px);
     }
 
-    .tube.locked {
-      opacity: 0.6;
-      border-color: rgba(150, 150, 150, 0.4);
-      background: linear-gradient(to right,
-        rgba(150, 150, 150, 0.15) 0%,
-        rgba(200, 200, 200, 0.25) 50%,
-        rgba(150, 150, 150, 0.15) 100%);
-      cursor: pointer;
-    }
-
-    .tube.locked:hover {
-      opacity: 0.8;
-      border-color: rgba(255, 230, 109, 0.6);
+    .bottle-wrapper.selected .bottle-neck {
+      border-color: rgba(255, 230, 109, 0.9);
       box-shadow:
-        inset -2px 0 10px rgba(255, 230, 109, 0.2),
+        inset -2px 0 6px rgba(255, 230, 109, 0.4),
+        inset 2px 0 6px rgba(0, 0, 0, 0.1),
+        0 0 15px rgba(255, 230, 109, 0.6);
+    }
+
+    .bottle-wrapper.selected {
+      transform: translateY(-12px);
+    }
+
+    .bottle-wrapper.locked {
+      opacity: 0.6;
+    }
+
+    .bottle-wrapper.locked .tube {
+      border-color: rgba(150, 150, 150, 0.5);
+      background: linear-gradient(to right,
+        rgba(150, 150, 150, 0.2) 0%,
+        rgba(200, 200, 200, 0.3) 50%,
+        rgba(150, 150, 150, 0.2) 100%);
+    }
+
+    .bottle-wrapper.locked .bottle-neck {
+      border-color: rgba(150, 150, 150, 0.5);
+      background: linear-gradient(to right,
+        rgba(150, 150, 150, 0.2) 0%,
+        rgba(200, 200, 200, 0.3) 50%,
+        rgba(150, 150, 150, 0.2) 100%);
+    }
+
+    .bottle-wrapper.locked:hover {
+      opacity: 0.8;
+    }
+
+    .bottle-wrapper.locked:hover .tube {
+      border-color: rgba(255, 230, 109, 0.7);
+      box-shadow:
+        inset -2px 0 10px rgba(255, 230, 109, 0.3),
         inset 2px 0 10px rgba(0, 0, 0, 0.1),
-        0 0 20px rgba(255, 230, 109, 0.4),
+        0 0 20px rgba(255, 230, 109, 0.5),
         0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .bottle-wrapper.locked:hover .bottle-neck {
+      border-color: rgba(255, 230, 109, 0.7);
     }
 
     .water-layer {
@@ -505,9 +599,20 @@
         padding: 15px;
       }
 
+      .bottle-neck {
+        width: 22px;
+        height: 28px;
+      }
+
       .tube {
         width: 48px;
         height: 192px;
+      }
+
+      .bottle-cap {
+        width: 28px;
+        height: 36px;
+        top: -36px;
       }
 
       #tubes-container {
@@ -542,9 +647,20 @@
         padding: 20px;
       }
 
+      .bottle-neck {
+        width: 24px;
+        height: 30px;
+      }
+
       .tube {
         width: 52px;
         height: 208px;
+      }
+
+      .bottle-cap {
+        width: 30px;
+        height: 38px;
+        top: -38px;
       }
 
       #tubes-container {
@@ -555,9 +671,20 @@
 
     /* 大屏手机 (>414px) - 保持原有样式 */
     @media (min-width: 415px) and (max-width: 768px) {
+      .bottle-neck {
+        width: 27px;
+        height: 34px;
+      }
+
       .tube {
         width: 58px;
         height: 232px;
+      }
+
+      .bottle-cap {
+        width: 33px;
+        height: 43px;
+        top: -43px;
       }
     }
 
@@ -579,9 +706,20 @@
         grid-template-columns: repeat(5, 1fr);
       }
 
+      .bottle-neck {
+        width: 23px;
+        height: 29px;
+      }
+
       .tube {
         width: 50px;
         height: 180px;
+      }
+
+      .bottle-cap {
+        width: 29px;
+        height: 37px;
+        top: -37px;
       }
 
       .modal-content {
@@ -600,9 +738,20 @@
         max-width: 1000px;
       }
 
+      .bottle-neck {
+        width: 30px;
+        height: 38px;
+      }
+
       .tube {
         width: 65px;
         height: 260px;
+      }
+
+      .bottle-cap {
+        width: 38px;
+        height: 48px;
+        top: -48px;
       }
     }
   </style>
@@ -1014,22 +1163,49 @@
       container.innerHTML = '';
 
       gameState.tubes.forEach((tube, index) => {
-        const tubeDiv = document.createElement('div');
-        tubeDiv.className = 'tube';
+        // 创建瓶子容器
+        const bottleWrapper = document.createElement('div');
+        bottleWrapper.className = 'bottle-wrapper';
 
         // 检查是否是锁定的特殊空管
         const isSpecial = gameState.specialTubes.includes(index);
         const isLocked = isSpecial && !gameState.unlockedTubes.includes(index);
 
         if (isLocked) {
-          tubeDiv.classList.add('locked');
+          bottleWrapper.classList.add('locked');
         }
 
         if (gameState.selectedTube === index) {
-          tubeDiv.classList.add('selected');
+          bottleWrapper.classList.add('selected');
         }
 
-        tubeDiv.onclick = () => handleTubeClick(index);
+        bottleWrapper.onclick = () => handleTubeClick(index);
+
+        // 检查试管是否完成（4层同色且无隐藏），自动添加瓶塞
+        if (tube.length === gameState.capacity) {
+          const hasHidden = tube.some(colorStr => isHidden(colorStr));
+
+          if (!hasHidden) {
+            const firstColor = getRealColor(tube[0]);
+            const allSameColor = tube.every(colorStr => getRealColor(colorStr) === firstColor);
+
+            if (allSameColor) {
+              // 创建瓶塞元素
+              const cap = document.createElement('div');
+              cap.className = 'bottle-cap';
+              bottleWrapper.appendChild(cap);
+            }
+          }
+        }
+
+        // 创建瓶颈
+        const bottleNeck = document.createElement('div');
+        bottleNeck.className = 'bottle-neck';
+        bottleWrapper.appendChild(bottleNeck);
+
+        // 创建瓶身
+        const tubeDiv = document.createElement('div');
+        tubeDiv.className = 'tube';
 
         // 如果试管为空，显示提示
         if (tube.length === 0) {
@@ -1071,26 +1247,11 @@
           tubeDiv.appendChild(layer);
         });
 
-        // 检查试管是否完成（4层同色且无隐藏），自动添加瓶塞
-        if (tube.length === gameState.capacity) {
-          // 检查是否有隐藏颜色
-          const hasHidden = tube.some(colorStr => isHidden(colorStr));
+        // 将瓶身添加到容器
+        bottleWrapper.appendChild(tubeDiv);
 
-          if (!hasHidden) {
-            // 检查是否所有颜色相同
-            const firstColor = getRealColor(tube[0]);
-            const allSameColor = tube.every(colorStr => getRealColor(colorStr) === firstColor);
-
-            if (allSameColor) {
-              // 创建瓶塞元素
-              const cap = document.createElement('div');
-              cap.className = 'bottle-cap';
-              tubeDiv.appendChild(cap);
-            }
-          }
-        }
-
-        container.appendChild(tubeDiv);
+        // 将整个瓶子添加到游戏区
+        container.appendChild(bottleWrapper);
       });
     }
 
