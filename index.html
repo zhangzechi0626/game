@@ -175,13 +175,13 @@
     .tube {
       width: 60px;
       height: 240px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
+      border: 5px solid rgba(100, 100, 100, 0.2);
       border-top: none;
-      border-radius: 0 0 15px 15px;
-      background: linear-gradient(to right,
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.25) 50%,
-        rgba(255, 255, 255, 0.1) 100%);
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(240, 240, 255, 0.95) 50%,
+        rgba(255, 255, 255, 0.9) 100%);
       display: flex;
       flex-direction: column-reverse;
       overflow: hidden;
@@ -192,28 +192,91 @@
       transform: translateZ(0);
       -webkit-tap-highlight-color: transparent;
       box-shadow:
-        inset -2px 0 8px rgba(255, 255, 255, 0.4),
-        inset 2px 0 8px rgba(0, 0, 0, 0.1),
-        0 4px 12px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(5px);
+        inset -3px 0 12px rgba(255, 255, 255, 0.6),
+        inset 3px 0 12px rgba(180, 180, 255, 0.2),
+        0 6px 20px rgba(0, 0, 0, 0.18),
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 -2px 4px rgba(200, 200, 255, 0.3);
+      backdrop-filter: blur(8px);
     }
 
-    /* 高光效果 */
+    /* 瓶子高光效果 */
     .tube::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 8px;
-      width: 12px;
+      left: 12px;
+      width: 16px;
       height: 100%;
       background: linear-gradient(to bottom,
-        rgba(255, 255, 255, 0.5) 0%,
-        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(255, 255, 255, 0.4) 30%,
+        rgba(255, 255, 255, 0.2) 60%,
         rgba(255, 255, 255, 0.1) 100%);
-      border-radius: 6px;
+      border-radius: 8px;
       pointer-events: none;
       z-index: 10;
+    }
+
+    /* 瓶子右侧反光 */
+    .tube::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 8px;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to bottom,
+        rgba(200, 200, 255, 0.4) 0%,
+        rgba(180, 180, 255, 0.2) 50%,
+        rgba(200, 200, 255, 0.1) 100%);
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* 瓶塞样式 */
+    .bottle-cap {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 45px;
+      height: 25px;
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
+      border-radius: 8px 8px 4px 4px;
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+      z-index: 11;
+      pointer-events: none;
+    }
+
+    /* 瓶塞顶部纹理 */
+    .bottle-cap::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 1px;
+    }
+
+    /* 瓶塞底部 */
+    .bottle-cap::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #6F3513 20%, #6F3513 80%, transparent);
+      border-radius: 0 0 2px 2px;
     }
 
     .tube:hover {
@@ -1007,6 +1070,25 @@
 
           tubeDiv.appendChild(layer);
         });
+
+        // 检查试管是否完成（4层同色且无隐藏），自动添加瓶塞
+        if (tube.length === gameState.capacity) {
+          // 检查是否有隐藏颜色
+          const hasHidden = tube.some(colorStr => isHidden(colorStr));
+
+          if (!hasHidden) {
+            // 检查是否所有颜色相同
+            const firstColor = getRealColor(tube[0]);
+            const allSameColor = tube.every(colorStr => getRealColor(colorStr) === firstColor);
+
+            if (allSameColor) {
+              // 创建瓶塞元素
+              const cap = document.createElement('div');
+              cap.className = 'bottle-cap';
+              tubeDiv.appendChild(cap);
+            }
+          }
+        }
 
         container.appendChild(tubeDiv);
       });
